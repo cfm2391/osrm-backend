@@ -259,12 +259,12 @@ Status MatchPlugin::HandleRequest(const RoutingAlgorithmsInterface &algorithms,
         {
             std::vector<bool> waypoint_legs;
             waypoint_legs.reserve(sub_matchings[index].nodes.size());
-            for (unsigned i = 0; i < sub_matchings[index].nodes.size() - 1; ++i)
+            for (unsigned i = 0; i < sub_matchings[index].nodes.size(); ++i)
             {
                 auto is_waypoint = std::find(parameters.waypoints.begin(),
                                              parameters.waypoints.end(),
                                              sub_matchings[index].indices[i]);
-                waypoint_legs[i] = is_waypoint != parameters.waypoints.end();
+                waypoint_legs.push_back(is_waypoint != parameters.waypoints.end());
             }
             sub_routes[index] = CollapseInternalRouteResult(sub_routes[index], waypoint_legs);
         }
